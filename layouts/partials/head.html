@@ -10,9 +10,7 @@
 <!-- favicon -->
 {{ partial "favicon.html" . }}
 <!-- seo metadata -->
-{{ if and (.IsHome) (.Site.Params.subTitle) }}
-<title>{{ .Site.Title }} - {{ .Site.Params.subTitle }}</title>
-{{ else if .IsHome }}
+{{ if .IsHome }}
 <title>{{ .Site.Title }}</title>
 {{ else }}
 <title>{{ .Title }} - {{ .Site.Title }}</title>

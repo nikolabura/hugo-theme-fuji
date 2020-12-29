@@ -10,7 +10,11 @@
         {{ partial "post-meta.html" . }}
     </div>
     <div class="post-item post-summary markdown-body">
+        <!-- <p>{{ .Summary }} ... <a href="{{ .Permalink }}">Read More</a></p> -->
         {{ .Summary }}
+        <div class="read-more">
+            
+        </div>
     </div>
 </div>
 {{ end }}

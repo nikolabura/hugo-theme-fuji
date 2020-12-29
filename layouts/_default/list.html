@@ -10,11 +10,22 @@
         {{ partial "post-meta.html" . }}
     </div>
     <div class="post-item post-summary markdown-body">
-        <!-- <p>{{ .Summary }} ... <a href="{{ .Permalink }}">Read More</a></p> -->
-        {{ .Summary }}
-        <div class="read-more">
-            
-        </div>
+        {{ $sum := .Summary }}
+        {{ if .Truncated }}
+            {{ $lc := 40 }}
+            {{ $Scratch := newScratch }}
+            {{ $Scratch.Set "s" "" }}
+            {{ range $index, $char := split (substr $sum (sub (len $sum) $lc) $lc | safeHTML) "" }}
+            {{ $opacAmt := (div (sub $lc (float $index)) $lc) }}
+            {{ $tag := (print "<span style='opacity: " $opacAmt ";'>") }}
+                {{ $Scratch.Set "s" ((print ($Scratch.Get "s") $tag $char "</span>") | safeHTML) }}
+            {{ end }}
+            {{ substr $sum 0 (mul $lc -1) | safeHTML }}
+            {{- $Scratch.Get "s" }}
+            <a href="{{ .Permalink }}">Read More</a>
+        {{ else }}
+            {{ $sum }}
+        {{ end }}
     </div>
 </div>
 {{ end }}

@@ -28,6 +28,15 @@
   }
 }
 
+.sidebar-toc {
+  li {
+    margin-left: 0.5em;
+  }
+  li::marker {
+    content: "-\00a0"; // nbsp
+  }
+}
+
 @media screen and (max-width: $width-md) {
   .sidebar {
     display: none !important;

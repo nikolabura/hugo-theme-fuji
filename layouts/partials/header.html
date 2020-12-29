@@ -2,9 +2,13 @@
     <div class="container-lg clearfix">
         <div class="col-12 header">
             <a class="title-main" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-            {{ with .Site.Params.subTitle }}
-            <span class="title-sub">{{ . }}</span>
-            {{ end }}
+            {{ $st := .Site.Params.subTitle }}
+            <span id="main-subtitle" class="title-sub">Imagine disabling JavaScript</span>
+            <script>
+                subtitleChoices = JSON.parse({{ jsonify $st }});
+                document.getElementById("main-subtitle").innerText
+                    = subtitleChoices[Math.floor(Math.random() * subtitleChoices.length)];
+            </script>
         </div>
     </div>
 </header>
